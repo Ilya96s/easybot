@@ -68,7 +68,6 @@ class MonitorControllerTest {
                 .diagonal(22)
                 .build();
 
-
         var monitor3 = MonitorDTO.builder()
                 .serialNumber("SERIAL3")
                 .manufacturer("MANUFACTURER1")
@@ -79,7 +78,7 @@ class MonitorControllerTest {
 
         when(monitorService.findAll()).thenReturn(List.of(monitor1, monitor2, monitor3));
 
-        mockMvc.perform(get("api/v1/monitor/"))
+        mockMvc.perform(get("/api/v1/monitor/"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -128,7 +127,7 @@ class MonitorControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(monitorService.findById(argumentCaptor.capture())).thenReturn(Optional.of(monitor));
 
-        mockMvc.perform(get("api/v1/monitor/1"))
+        mockMvc.perform(get("/api/v1/monitor/1"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -157,7 +156,7 @@ class MonitorControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(monitorService.findById(argumentCaptor.capture())).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/monitor/1"))
+        mockMvc.perform(get("/api/v1/monitor/1"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
@@ -189,7 +188,7 @@ class MonitorControllerTest {
         ArgumentCaptor<MonitorDTO> argumentCaptor = ArgumentCaptor.forClass(MonitorDTO.class);
         when(monitorService.create(argumentCaptor.capture())).thenReturn(savedMonitor);
 
-        mockMvc.perform(post("api/v1/monitor/")
+        mockMvc.perform(post("/api/v1/monitor/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -222,7 +221,7 @@ class MonitorControllerTest {
         jsonObject.put("manufacturer", "MANUFACTURER1");
         jsonObject.put("diagonal", 22);
 
-        mockMvc.perform(post("api/v1/monitor/")
+        mockMvc.perform(post("/api/v1/monitor/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -253,7 +252,7 @@ class MonitorControllerTest {
         ArgumentCaptor<MonitorDTO> argumentCaptor = ArgumentCaptor.forClass(MonitorDTO.class);
         when(monitorService.update(argumentCaptor.capture(), eq(1))).thenReturn(true);
 
-        mockMvc.perform(put("api/v1/monitor/1")
+        mockMvc.perform(put("/api/v1/monitor/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -288,7 +287,7 @@ class MonitorControllerTest {
         ArgumentCaptor<MonitorDTO> argumentCaptor = ArgumentCaptor.forClass(MonitorDTO.class);
         when(monitorService.update(argumentCaptor.capture(), eq(1))).thenReturn(false);
 
-        mockMvc.perform(put("api/v1/monitor/1")
+        mockMvc.perform(put("/api/v1/monitor/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())

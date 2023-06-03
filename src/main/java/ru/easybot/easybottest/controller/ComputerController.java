@@ -37,10 +37,12 @@ public class ComputerController {
 
     @Operation(
             summary = "Получить компьютер по идентификатору",
-            description = "Если компьютер по заданному идентификатору найден, то метод возвращает объект типа " +
-                    "ResponseEntity<ComputerDTO>, содержащий объект типа ComputerDTO, и статус ответа OK." +
-                    "Если по заданному идентификатору компьютер не найден, то выбрасывается исключение " +
-                    "ResponseStatusException со статусом NOT_FOUND и сообщением, что компьютер с таким идентификатором не найден."
+            description = """
+                    Если компьютер по заданному идентификатору найден, то метод возвращает объект типа
+                    ResponseEntity<ComputerDTO>, содержащий объект типа ComputerDTO, и статус ответа OK.
+                    Если по заданному идентификатору компьютер не найден, то выбрасывается исключение
+                    ResponseStatusException со статусом NOT_FOUND и сообщением, что компьютер с таким идентификатором не найден.
+                    """
     )
     @GetMapping("/{id}")
     public ResponseEntity<ComputerDTO> findById(@PathVariable int id) {
@@ -53,8 +55,10 @@ public class ComputerController {
 
     @Operation(
             summary = "Сохранить компьютер",
-            description = "Метод сохранят компьютер в базу данных и возвращает объект типа " +
-                    "ResponseEntity<ComputerDTO>, содержащий созданный объект типа ComputerDTO и статус ответа CREATED"
+            description = """
+                    Метод сохранят компьютер в базу данных и возвращает объект типа
+                    ResponseEntity<ComputerDTO>, содержащий созданный объект типа ComputerDTO и статус ответа CREATED
+                    """
     )
     @PostMapping("/")
     public ResponseEntity<ComputerDTO> create(@RequestBody ComputerDTO computerDTO) {
@@ -66,10 +70,12 @@ public class ComputerController {
 
     @Operation(
             summary = "Обновить компьютер",
-            description = "Если обновление компьютера в базе данных будет успешным, " +
-                    "то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK." +
-                    "Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST " +
-                    "и сообщением о том, что не удалось обновить компьютер"
+            description = """
+                    Если обновление компьютера в базе данных будет успешным,
+                    то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK.
+                    Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST
+                    и сообщением о том, что не удалось обновить компьютер
+                    """
     )
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @Validated @RequestBody ComputerDTO computerDTO) {

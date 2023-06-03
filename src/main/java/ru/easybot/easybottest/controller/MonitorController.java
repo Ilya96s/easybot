@@ -38,10 +38,12 @@ public class MonitorController {
 
     @Operation(
             summary = "Получить монитор по идентификатору",
-            description = "Если монитор по заданному идентификатору найден, то метод возвращает объект типа " +
-                    "ResponseEntity<MonitorDTO>, содержащий объект типа MonitorDTO, и статус ответа OK." +
-                    "Если по заданному идентификатору монитор не найден, то выбрасывается исключение " +
-                    "ResponseStatusException со статусом NOT_FOUND и сообщением, что монитор с таким идентификатором не найден."
+            description = """
+                    Если монитор по заданному идентификатору найден, то метод возвращает объект типа
+                    ResponseEntity<MonitorDTO>, содержащий объект типа MonitorDTO, и статус ответа OK.
+                    Если по заданному идентификатору монитор не найден, то выбрасывается исключение
+                    ResponseStatusException со статусом NOT_FOUND и сообщением, что монитор с таким идентификатором не найден.
+                    """
     )
     @GetMapping("/{id}")
     public ResponseEntity<MonitorDTO> findById(
@@ -56,8 +58,10 @@ public class MonitorController {
 
     @Operation(
             summary = "Сохранить монитор",
-            description = "Метод сохранят монитор в базу данных и возвращает объект типа " +
-                    "ResponseEntity<MonitorDTO>, содержащий созданный объект типа MonitorDTO и статус ответа CREATED"
+            description = """
+                    Метод сохранят монитор в базу данных и возвращает объект типа
+                    ResponseEntity<MonitorDTO>, содержащий созданный объект типа MonitorDTO и статус ответа CREATED
+                    """
     )
     @PostMapping("/")
     public ResponseEntity<MonitorDTO> create(
@@ -71,10 +75,12 @@ public class MonitorController {
 
     @Operation(
             summary = "Обновить монитор",
-            description = "Если обновление монитора в базе данных будет успешным, " +
-                    "то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK." +
-                    "Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST " +
-                    "и сообщением о том, что не удалось обновить монитор"
+            description = """
+                    "Если обновление монитора в базе данных будет успешным,
+                    то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK.
+                    Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST
+                    и сообщением о том, что не удалось обновить монитор
+                    """
     )
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @Validated @RequestBody MonitorDTO monitorDTO) {

@@ -37,10 +37,12 @@ public class HddController {
 
     @Operation(
             summary = "Получить жесткий диск по идентификатору",
-            description = "Если жесткий диск по заданному идентификатору найден, то метод возвращает объект типа " +
-                    "ResponseEntity<HddDTO>, содержащий объект типа HddDTO, и статус ответа OK." +
-                    "Если по заданному идентификатору жесткий диск не найден, то выбрасывается исключение " +
-                    "ResponseStatusException со статусом NOT_FOUND и сообщением, что жесткий диск с таким идентификатором не найден."
+            description = """
+                    Если жесткий диск по заданному идентификатору найден, то метод возвращает объект типа
+                    ResponseEntity<HddDTO>, содержащий объект типа HddDTO, и статус ответа OK.
+                    Если по заданному идентификатору жесткий диск не найден, то выбрасывается исключение
+                    ResponseStatusException со статусом NOT_FOUND и сообщением, что жесткий диск с таким идентификатором не найден.
+                    """
     )
     @GetMapping("/{id}")
     public ResponseEntity<HddDTO> findById(@PathVariable int id) {
@@ -53,8 +55,10 @@ public class HddController {
 
     @Operation(
             summary = "Сохранить жесткий диск",
-            description = "Метод сохранят жесткий диск в базу данных и возвращает объект типа " +
-                    "ResponseEntity<HddDTO>, содержащий созданный объект типа HddDTO и статус ответа CREATED"
+            description = """
+                    Метод сохранят жесткий диск в базу данных и возвращает объект типа
+                    ResponseEntity<HddDTO>, содержащий созданный объект типа HddDTO и статус ответа CREATED
+                    """
     )
     @PostMapping("/")
     public ResponseEntity<HddDTO> create(@Validated @RequestBody HddDTO hddDTO) {
@@ -66,10 +70,11 @@ public class HddController {
 
     @Operation(
             summary = "Обновить жесткий диск",
-            description = "Если обновление жесткого диска в базе данных будет успешным, " +
-                    "то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK." +
-                    "Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST " +
-                    "и сообщением о том, что не удалось обновить жесткий диск"
+            description = """
+                    Если обновление жесткого диска в базе данных будет успешным,
+                    то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK.
+                    Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST
+                    и сообщением о том, что не удалось обновить жесткий диск"""
     )
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @Validated @RequestBody HddDTO hddDTO) {

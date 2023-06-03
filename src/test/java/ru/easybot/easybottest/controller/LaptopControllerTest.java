@@ -69,7 +69,6 @@ class LaptopControllerTest {
                 .size(13)
                 .build();
 
-
         var laptop3 = LaptopDTO.builder()
                 .serialNumber("SERIAL3")
                 .manufacturer("MANUFACTURER1")
@@ -80,7 +79,7 @@ class LaptopControllerTest {
 
         when(laptopService.findAll()).thenReturn(List.of(laptop1, laptop2, laptop3));
 
-        mockMvc.perform(get("api/v1/laptop/"))
+        mockMvc.perform(get("/api/v1/laptop/"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -129,7 +128,7 @@ class LaptopControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(laptopService.findById(argumentCaptor.capture())).thenReturn(Optional.of(laptop1));
 
-        mockMvc.perform(get("api/v1/laptop/1"))
+        mockMvc.perform(get("/api/v1/laptop/1"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -158,7 +157,7 @@ class LaptopControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(laptopService.findById(argumentCaptor.capture())).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("api/v1/laptop/1"))
+        mockMvc.perform(get("/api/v1/laptop/1"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
@@ -190,7 +189,7 @@ class LaptopControllerTest {
         ArgumentCaptor<LaptopDTO> argumentCaptor = ArgumentCaptor.forClass(LaptopDTO.class);
         when(laptopService.create(argumentCaptor.capture())).thenReturn(savedLaptop);
 
-        mockMvc.perform(post("api/v1/laptop/")
+        mockMvc.perform(post("/api/v1/laptop/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -223,7 +222,7 @@ class LaptopControllerTest {
         jsonObject.put("manufacturer", "MANUFACTURER1");
         jsonObject.put("size", 13);
 
-        mockMvc.perform(post("api/v1/laptop/")
+        mockMvc.perform(post("/api/v1/laptop/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -254,7 +253,7 @@ class LaptopControllerTest {
         ArgumentCaptor<LaptopDTO> argumentCaptor = ArgumentCaptor.forClass(LaptopDTO.class);
         when(laptopService.update(argumentCaptor.capture(), eq(1))).thenReturn(true);
 
-        mockMvc.perform(put("api/v1/laptop/1")
+        mockMvc.perform(put("/api/v1/laptop/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -289,7 +288,7 @@ class LaptopControllerTest {
         ArgumentCaptor<LaptopDTO> argumentCaptor = ArgumentCaptor.forClass(LaptopDTO.class);
         when(laptopService.update(argumentCaptor.capture(), eq(1))).thenReturn(false);
 
-        mockMvc.perform(put("api/v1/laptop/1")
+        mockMvc.perform(put("/api/v1/laptop/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())

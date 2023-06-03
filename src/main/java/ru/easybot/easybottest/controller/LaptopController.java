@@ -37,10 +37,12 @@ public class LaptopController {
 
     @Operation(
             summary = "Получить ноутбук по идентификатору",
-            description = "Если ноутбук по заданному идентификатору найден, то метод возвращает объект типа " +
-                    "ResponseEntity<LaptopDTO>, содержащий объект типа LaptopDTO, и статус ответа OK." +
-                    "Если по заданному идентификатору ноутбук не найден, то выбрасывается исключение " +
-                    "ResponseStatusException со статусом NOT_FOUND и сообщением, что ноутбук с таким идентификатором не найден."
+            description = """
+                    Если ноутбук по заданному идентификатору найден, то метод возвращает объект типа
+                    ResponseEntity<LaptopDTO>, содержащий объект типа LaptopDTO, и статус ответа OK.
+                    Если по заданному идентификатору ноутбук не найден, то выбрасывается исключение
+                    ResponseStatusException со статусом NOT_FOUND и сообщением, что ноутбук с таким идентификатором не найден.
+                    """
     )
     @GetMapping("/{id}")
     public ResponseEntity<LaptopDTO> findById(@PathVariable int id) {
@@ -53,8 +55,10 @@ public class LaptopController {
 
     @Operation(
             summary = "Сохранить ноутбук",
-            description = "Метод сохранят ноутбук в базу данных и возвращает объект типа " +
-                    "ResponseEntity<LaptopDTO>, содержащий созданный объект типа LaptopDTO и статус ответа CREATED"
+            description = """
+                    Метод сохранят ноутбук в базу данных и возвращает объект типа
+                    ResponseEntity<LaptopDTO>, содержащий созданный объект типа LaptopDTO и статус ответа CREATED"
+                    """
     )
     @PostMapping("/")
     public ResponseEntity<LaptopDTO> create(@Validated @RequestBody LaptopDTO laptopDTO) {
@@ -66,10 +70,12 @@ public class LaptopController {
 
     @Operation(
             summary = "Обновить ноутбук",
-            description = "Если обновление ноутбука в базе данных будет успешным, " +
-                    "то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK." +
-                    "Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST " +
-                    "и сообщением о том, что не удалось обновить ноутбук"
+            description = """
+                    Если обновление ноутбука в базе данных будет успешным,
+                    то метод вернет объект типа ResponseEntity<Void>, содержащий статус ответа OK.
+                    Иначе метод выбросит исключение ResponseStatusException со статусом ответа BAD_REQUEST
+                    и сообщением о том, что не удалось обновить ноутбук"
+                    """
     )
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable int id, @Validated @RequestBody LaptopDTO laptopDTO) {

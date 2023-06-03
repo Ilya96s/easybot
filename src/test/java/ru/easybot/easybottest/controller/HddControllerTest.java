@@ -68,7 +68,6 @@ class HddControllerTest {
                 .capacity(20)
                 .build();
 
-
         var hdd3 = HddDTO.builder()
                 .serialNumber("SERIAL3")
                 .manufacturer("MANUFACTURER1")
@@ -79,7 +78,7 @@ class HddControllerTest {
 
         when(hddService.findAll()).thenReturn(List.of(hdd1, hdd2, hdd3));
 
-        mockMvc.perform(get("api/v1/hdd/"))
+        mockMvc.perform(get("/api/v1/hdd/"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -128,7 +127,7 @@ class HddControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(hddService.findById(argumentCaptor.capture())).thenReturn(Optional.of(hdd1));
 
-        mockMvc.perform(get("api/v1/hdd/1"))
+        mockMvc.perform(get("/api/v1/hdd/1"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -157,7 +156,7 @@ class HddControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(hddService.findById(argumentCaptor.capture())).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("api/v1/hdd/1"))
+        mockMvc.perform(get("/api/v1/hdd/1"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
@@ -189,7 +188,7 @@ class HddControllerTest {
         ArgumentCaptor<HddDTO> argumentCaptor = ArgumentCaptor.forClass(HddDTO.class);
         when(hddService.create(argumentCaptor.capture())).thenReturn(savedHdd);
 
-        mockMvc.perform(post("api/v1/hdd/")
+        mockMvc.perform(post("/api/v1/hdd/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -222,7 +221,7 @@ class HddControllerTest {
         jsonObject.put("manufacturer", "MANUFACTURER1");
         jsonObject.put("capacity", 10);
 
-        mockMvc.perform(post("api/v1/hdd/")
+        mockMvc.perform(post("/api/v1/hdd/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -253,7 +252,7 @@ class HddControllerTest {
         ArgumentCaptor<HddDTO> argumentCaptor = ArgumentCaptor.forClass(HddDTO.class);
         when(hddService.update(argumentCaptor.capture(), eq(1))).thenReturn(true);
 
-        mockMvc.perform(put("api/v1/hdd/1")
+        mockMvc.perform(put("/api/v1/hdd/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -288,7 +287,7 @@ class HddControllerTest {
         ArgumentCaptor<HddDTO> argumentCaptor = ArgumentCaptor.forClass(HddDTO.class);
         when(hddService.update(argumentCaptor.capture(), eq(1))).thenReturn(false);
 
-        mockMvc.perform(put("api/v1/hdd/1")
+        mockMvc.perform(put("/api/v1/hdd/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())

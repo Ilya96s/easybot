@@ -70,7 +70,6 @@ class ComputerControllerTest {
                 .type("DESKTOP")
                 .build();
 
-
         var computer3 = ComputerDTO.builder()
                 .serialNumber("SERIAL3")
                 .manufacturer("MANUFACTURER1")
@@ -81,7 +80,7 @@ class ComputerControllerTest {
 
         when(computerService.findAll()).thenReturn(List.of(computer1, computer2, computer3));
 
-        mockMvc.perform(get("api/v1/computer/"))
+        mockMvc.perform(get("/api/v1/computer/"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -130,7 +129,7 @@ class ComputerControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(computerService.findById(argumentCaptor.capture())).thenReturn(Optional.of(computer1));
 
-        mockMvc.perform(get("api/v1/computer/1"))
+        mockMvc.perform(get("/api/v1/computer/1"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
@@ -159,7 +158,7 @@ class ComputerControllerTest {
         ArgumentCaptor<Integer> argumentCaptor = ArgumentCaptor.forClass(Integer.class);
         when(computerService.findById(argumentCaptor.capture())).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("api/v1/computer/1"))
+        mockMvc.perform(get("/api/v1/computer/1"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
@@ -191,7 +190,7 @@ class ComputerControllerTest {
         ArgumentCaptor<ComputerDTO> argumentCaptor = ArgumentCaptor.forClass(ComputerDTO.class);
         when(computerService.create(argumentCaptor.capture())).thenReturn(savedComputer);
 
-        mockMvc.perform(post("api/v1/computer/")
+        mockMvc.perform(post("/api/v1/computer/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -238,7 +237,7 @@ class ComputerControllerTest {
         when(computerService.create(argumentCaptor.capture())).thenThrow(
                 new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-        mockMvc.perform(post("api/v1/computer/")
+        mockMvc.perform(post("/api/v1/computer/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -273,7 +272,7 @@ class ComputerControllerTest {
         ArgumentCaptor<ComputerDTO> argumentCaptor = ArgumentCaptor.forClass(ComputerDTO.class);
         when(computerService.update(argumentCaptor.capture(), eq(1))).thenReturn(true);
 
-        mockMvc.perform(put("api/v1/computer/1")
+        mockMvc.perform(put("/api/v1/computer/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
@@ -308,7 +307,7 @@ class ComputerControllerTest {
         ArgumentCaptor<ComputerDTO> argumentCaptor = ArgumentCaptor.forClass(ComputerDTO.class);
         when(computerService.update(argumentCaptor.capture(), eq(1))).thenReturn(false);
 
-        mockMvc.perform(put("api/v1/computer/1")
+        mockMvc.perform(put("/api/v1/computer/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonObject.toString()))
                 .andDo(print())
